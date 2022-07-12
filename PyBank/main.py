@@ -13,8 +13,8 @@ with open(csv_path) as csvfile:
 
     csv_header = next(csv_output)
 
-    total_rows = sum(1 for row in csv_output)
-    print(f"Total Months: {total_rows}")
+    total_months = sum(1 for row in csv_output)
+    print(f"Total Months: {total_months}")
 
 
 with open(csv_path) as csvfile:
@@ -23,23 +23,14 @@ with open(csv_path) as csvfile:
 
     csv_header = next(csv_output)
 
-    net_total = 0
+    total = 0
     
-    for month_total in csv_output:
+    for row in csv_output:
         
-        if int(month_total[1]) != 0:
-            net_total = net_total + int(month_total[1])
+        if int(row[1]) != 0:
+            total = total + int(row[1])
 
-    print(f"Total: ${net_total}")
-
-
-with open(csv_path) as csvfile:
-
-    csv_output = csv.reader(csvfile, delimiter = ",")
-
-    csv_header = next(csv_output)
-
-    print("Average Change: ")
+    print(f"Total: ${total}")
 
 
 with open(csv_path) as csvfile:
@@ -48,72 +39,38 @@ with open(csv_path) as csvfile:
 
     csv_header = next(csv_output)
 
-    base_increase = 0
-    inc_month = str
-
-    for inc_profit in csv_output:
-
-        if int(inc_profit[1]) > base_increase:
-            base_increase = int(inc_profit[1])
-            inc_month = str(inc_profit[0])
-
-    print(f"Greatest Increase in Profits: {inc_month} (${base_increase})")
-
-
-with open(csv_path) as csvfile:
-
-    csv_output = csv.reader(csvfile, delimiter = ",")
-
-    csv_header = next(csv_output)
-
-    base_decrease = 0
-    dec_month = str
-
-    for dec_profit in csv_output:
-
-        if int(dec_profit[1]) < base_decrease:
-            base_decrease = int(dec_profit[1])
-            dec_month = str(dec_profit[0])
-
-    print(f"Greatest Decrease in Profits: {dec_month} (${base_decrease})")
-
-
-
-
+    last_value = 0
+    avg_total = 0
+    change_value = 0
+    inc_profit = 0
+    dec_profit = 0
     
+    for row in csv_output:
 
+        column_dates = []
+        column_dates = row[0]
 
+        column_money = []
+        column_money = row[1]
 
+        if last_value != 0:
+            change_value = int(column_money) - int(last_value)
+            avg_total = change_value + avg_total
 
+        if change_value > inc_profit:
+            inc_profit = change_value
+            inc_row = column_dates
+        
+        if change_value < dec_profit:
+            dec_profit = change_value
+            dec_row = column_dates
 
+        last_value = int(column_money)
 
+    avg_mean = (avg_total) / (total_months - 1)
 
+    print(f"Average Change: ${avg_mean}")
 
+    print(f"Greatest Increase in Profits: {inc_row} (${inc_profit})")
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print(f"Greatest Decrease in Profits: {dec_row} (${dec_profit})")
