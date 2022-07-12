@@ -4,7 +4,6 @@ import csv
 csv_path = os.path.join("Resources", "budget_data.csv")
 
 print("Financial Analysis")
-
 print("----------------------------")
 
 with open(csv_path) as csvfile:
@@ -68,8 +67,9 @@ with open(csv_path) as csvfile:
         last_value = int(column_money)
 
     avg_mean = (avg_total) / (total_months - 1)
+    avg_mean_r = round(float(avg_mean), 2)
 
-    print(f"Average Change: ${avg_mean}")
+    print(f"Average Change: ${avg_mean_r}")
 
     print(f"Greatest Increase in Profits: {inc_row} (${inc_profit})")
 
