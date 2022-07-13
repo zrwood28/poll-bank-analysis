@@ -77,12 +77,12 @@ with open(csv_path) as csvfile:
     avg_mean_r = round(float(avg_mean), 2)
 
     print(f"Average Change: ${avg_mean_r}")
-
     print(f"Greatest Increase in Profits: {inc_row} (${inc_profit})")
-
     print(f"Greatest Decrease in Profits: {dec_row} (${dec_profit})")
 
 # Re-print all outputs into the .txt file
+# https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file
+# The thread above was extremely helpful in working out the below code (7/12)
 with open("analysis.txt", "w") as analysis_text:
 
     print("Financial Analysis", file = analysis_text)
