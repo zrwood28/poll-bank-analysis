@@ -1,11 +1,15 @@
+# Import modules
 import os
 import csv
 
+#Open the CSV file
 csv_path = os.path.join("Resources", "budget_data.csv")
 
+# Output formatting
 print("Financial Analysis")
 print("----------------------------")
 
+# Create the Total Months variable
 with open(csv_path) as csvfile:
 
     csv_output = csv.reader(csvfile, delimiter = ",")
@@ -16,6 +20,7 @@ with open(csv_path) as csvfile:
     print(f"Total Months: {total_months}")
 
 
+# Create the Total Profit variable
 with open(csv_path) as csvfile:
 
     csv_output = csv.reader(csvfile, delimiter = ",")
@@ -32,6 +37,7 @@ with open(csv_path) as csvfile:
     print(f"Total: ${total}")
 
 
+# Create our Average Change variables by subtracting each current month's net profit by the last
 with open(csv_path) as csvfile:
 
     csv_output = csv.reader(csvfile, delimiter = ",")
@@ -56,6 +62,7 @@ with open(csv_path) as csvfile:
             change_value = int(column_money) - int(last_value)
             avg_total = change_value + avg_total
 
+        # Declare our Greatest Increase and Decrease
         if change_value > inc_profit:
             inc_profit = change_value
             inc_row = column_dates
@@ -74,3 +81,14 @@ with open(csv_path) as csvfile:
     print(f"Greatest Increase in Profits: {inc_row} (${inc_profit})")
 
     print(f"Greatest Decrease in Profits: {dec_row} (${dec_profit})")
+
+# Re-print all outputs into the .txt file
+with open("analysis.txt", "w") as analysis_text:
+
+    print("Financial Analysis", file = analysis_text)
+    print("----------------------------", file = analysis_text)
+    print(f"Total Months: {total_months}", file = analysis_text)
+    print(f"Total: ${total}", file = analysis_text)
+    print(f"Average Change: ${avg_mean_r}", file = analysis_text)
+    print(f"Greatest Increase in Profits: {inc_row} (${inc_profit})", file = analysis_text)
+    print(f"Greatest Decrease in Profits: {dec_row} (${dec_profit})", file = analysis_text)
