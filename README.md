@@ -1,4 +1,4 @@
-# python-challenge
+# poll-bank-analysis
 Analysis of both financial and voting data.
 
 ## PyBank
